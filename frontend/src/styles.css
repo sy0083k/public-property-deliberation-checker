@@ -1,0 +1,236 @@
+:root {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: #f5f7fb;
+  color: #1c2633;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.page {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+header {
+  margin-bottom: 20px;
+}
+
+h1,
+h2 {
+  margin: 0 0 10px 0;
+}
+
+.panel {
+  background: #ffffff;
+  border: 1px solid #dce4ef;
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.form-steps {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(240px, 1fr));
+  gap: 12px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.checkbox {
+  flex-direction: row;
+  align-items: center;
+}
+
+.summary-line {
+  margin: 4px 0;
+  padding: 10px;
+  background: #f4f8ff;
+  border: 1px solid #d6e3fb;
+  border-radius: 8px;
+  grid-column: 1 / -1;
+}
+
+.law-box {
+  grid-column: 1 / -1;
+  border: 1px solid #d6e3fb;
+  background: #f8fbff;
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.actions {
+  grid-column: 1 / -1;
+}
+
+input,
+select,
+button {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #b9c7d8;
+}
+
+button {
+  background: #2366d1;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+select:disabled {
+  background: #f1f4f8;
+  color: #7a8699;
+  cursor: not-allowed;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th,
+td {
+  border-bottom: 1px solid #e5ebf4;
+  text-align: left;
+  padding: 8px;
+  font-size: 14px;
+}
+
+ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.print-doc {
+  display: none;
+}
+
+.print-result-summary {
+  margin: 10px 0;
+  padding: 8px 10px;
+  border: 1px solid #cfd9e8;
+  border-radius: 6px;
+}
+
+.print-input-summary {
+  margin: 10px 0;
+  padding: 8px 10px;
+  border: 1px solid #cfd9e8;
+  border-radius: 6px;
+}
+
+.print-law-box {
+  margin: 10px 0;
+  padding: 8px 10px;
+  border: 1px solid #cfd9e8;
+  border-radius: 6px;
+}
+
+.print-law-empty {
+  margin: 6px 0 0;
+  color: #47566b;
+}
+
+.print-footnote {
+  margin-top: 14px;
+  font-size: 12px;
+  color: #47566b;
+}
+
+@media (max-width: 820px) {
+  .form-steps {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm;
+  }
+
+  body {
+    margin: 0;
+    background: #fff;
+    color: #000;
+  }
+
+  .page {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .page > * {
+    display: none !important;
+  }
+
+  .print-doc {
+    display: block !important;
+  }
+
+  .print-doc h1,
+  .print-doc h2 {
+    margin: 0 0 8px 0;
+  }
+
+  .print-doc p {
+    margin: 4px 0;
+  }
+
+  .print-doc table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+  }
+
+  .print-doc th,
+  .print-doc td {
+    border: 1px solid #444;
+    text-align: left;
+    padding: 6px;
+    font-size: 12px;
+    vertical-align: top;
+  }
+
+  .print-doc thead {
+    display: table-header-group;
+  }
+
+  .print-doc tr,
+  .print-doc td,
+  .print-doc th {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
