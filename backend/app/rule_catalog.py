@@ -39,13 +39,11 @@ EXCEPTION_REASON_OPTIONS: list[tuple[str, str]] = _catalog.exception_reason_opti
 
 LABEL_TO_ITEM: dict[str, SourceRuleItem] = {item.label: item for item in SOURCE_RULE_ITEMS}
 
-_EXCEPTION_DISABLED_ITEMS = _catalog.exception_disabled_items
+_EXCEPTION_ENABLED_ITEMS = {"공유재산의 취득", "공유재산의 처분"}
 
 
 def is_property_related_label(label: str) -> bool:
-    if label in _EXCEPTION_DISABLED_ITEMS:
-        return False
-    return "취득" in label or "처분" in label
+    return label in _EXCEPTION_ENABLED_ITEMS
 
 
 def decision_for_group(group: RuleGroup) -> DecisionType:

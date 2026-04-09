@@ -29,13 +29,8 @@ export const EXCEPTION_REASON_OPTIONS: Array<{ code: ExceptionReasonCode; label:
   { code: 'same_purpose_scale_replacement', label: '공유재산을 종전과 동일한 목적과 규모로 대체하는 재산의 취득' }
 ]
 
-const EXCEPTION_DISABLED_ITEMS = new Set<string>([
-  '공유재산관리계획 수립 후 취득·처분 대상 공유재산의 위치 변경',
-  '공유재산관리계획 수립 후 취득·처분할 토지의 면적이 30%를 초과하여 증감',
-  '공유재산관리계획 수립 후 취득·처분할 토지 또는 건물 등 시설물의 기준가격이 30%를 초과하여 증감'
-])
+const EXCEPTION_ENABLED_ITEMS = new Set<string>(['공유재산의 취득', '공유재산의 처분'])
 
 export function isPropertyRelatedSourceItem(label: string): boolean {
-  if (EXCEPTION_DISABLED_ITEMS.has(label)) return false
-  return label.includes('취득') || label.includes('처분')
+  return EXCEPTION_ENABLED_ITEMS.has(label)
 }

@@ -24,7 +24,6 @@ class CatalogData:
     thresholds: dict[str, float]
     source_rule_items: list[CatalogRuleItem]
     exception_reason_options: list[tuple[str, str]]
-    exception_disabled_items: set[str]
 
 
 def load_catalog(municipality_code: str) -> CatalogData:
@@ -51,7 +50,6 @@ def load_catalog(municipality_code: str) -> CatalogData:
 
     source_rule_items = _validate_source_rule_items(parsed, path)
     exception_reason_options = _validate_exception_reason_options(parsed, path)
-    exception_disabled_items = _validate_exception_disabled_items(parsed, path)
     thresholds = _validate_thresholds(parsed, path)
 
     return CatalogData(
@@ -59,7 +57,6 @@ def load_catalog(municipality_code: str) -> CatalogData:
         thresholds=thresholds,
         source_rule_items=source_rule_items,
         exception_reason_options=exception_reason_options,
-        exception_disabled_items=exception_disabled_items,
     )
 
 
@@ -143,22 +140,6 @@ def _validate_exception_reason_options(parsed: dict[str, Any], path: Path) -> li
         result.append((code, label))
 
     return result
-
-
-def _validate_exception_disabled_items(parsed: dict[str, Any], path: Path) -> set[str]:
-    value = parsed.get("exception_disabled_items")
-    if not isinstance(value, list):
-        raise ValueError(f"Catalog validation failed: {path}: exception_disabled_items must be a list.")
-
-    result: set[str] = set()
-    for index, item in enumerate(value):
-        if not isinstance(item, str) or not item.strip():
-            raise ValueError(
-                f"Catalog validation failed: {path}: exception_disabled_items[{index}] must be a non-empty string."
-            )
-        result.add(item)
-    return result
-
 
 def _validate_thresholds(parsed: dict[str, Any], path: Path) -> dict[str, float]:
     value = parsed.get("thresholds")

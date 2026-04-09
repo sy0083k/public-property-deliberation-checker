@@ -78,13 +78,13 @@ pytest -q tests
 - 규칙 원본 파일: `backend/rules/catalogs/SEOSAN.yaml`
 - 개발자는 YAML에서 항목을 수정/추가/삭제한 뒤 테스트를 실행하면 됩니다.
 - 웹 화면의 `사례 유형` 콤보 상자 순서는 YAML `source_rule_items` 입력 순서를 그대로 따릅니다.
+- 예외 사유 콤보 상자는 `공유재산의 취득`, `공유재산의 처분` 두 사례 유형에서만 활성화됩니다.
 - 필수 필드:
   - `schema_version: 1`
   - `municipality_code`
   - `thresholds` (`amount_threshold`, `acquisition_area_threshold`, `disposal_area_threshold`, `seosan_private_sale_threshold`)
   - `source_rule_items` (`label`, `group`, `laws`)
   - `exception_reason_options` (`code`, `label`)
-  - `exception_disabled_items`
 - `group` 허용값: `deliberation`, `plan_setup`, `plan_change`
 - 앱 시작 시 `SEOSAN` 활성 규칙 프로파일의 임계값(`config`)은 YAML `thresholds` 값으로 동기화됩니다.
 - 로딩/검증 실패 시 앱 시작 시점에 에러가 발생합니다.

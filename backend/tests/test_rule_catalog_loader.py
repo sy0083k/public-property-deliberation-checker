@@ -23,8 +23,6 @@ source_rule_items:
 exception_reason_options:
   - code: none
     label: 해당 없음
-exception_disabled_items:
-  - 공유재산관리계획 수립 후 취득·처분 대상 공유재산의 위치 변경
 """.strip()
 
 
@@ -104,7 +102,6 @@ thresholds:
 exception_reason_options:
   - code: none
     label: 해당 없음
-exception_disabled_items: []
 """.strip(),
     )
     monkeypatch.setattr(loader, "CATALOGS_DIR", tmp_path)
@@ -134,7 +131,6 @@ exception_reason_options:
     label: 해당 없음
   - code: none
     label: 중복
-exception_disabled_items: []
 """.strip(),
     )
     monkeypatch.setattr(loader, "CATALOGS_DIR", tmp_path)
@@ -162,7 +158,6 @@ source_rule_items:
 exception_reason_options:
   - code: none
     label: 해당 없음
-exception_disabled_items: []
 """.strip(),
     )
     monkeypatch.setattr(loader, "CATALOGS_DIR", tmp_path)
@@ -192,7 +187,6 @@ source_rule_items:
 exception_reason_options:
   - code: none
     label: 해당 없음
-exception_disabled_items: []
 """.strip(),
     )
     monkeypatch.setattr(loader, "CATALOGS_DIR", tmp_path)
@@ -220,7 +214,6 @@ source_rule_items:
 exception_reason_options:
   - code: none
     label: 해당 없음
-exception_disabled_items: []
 """.strip(),
     )
     monkeypatch.setattr(loader, "CATALOGS_DIR", tmp_path)
