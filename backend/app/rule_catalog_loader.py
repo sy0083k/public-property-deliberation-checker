@@ -147,7 +147,8 @@ def _validate_thresholds(parsed: dict[str, Any], path: Path) -> dict[str, float]
         raise ValueError(f"Catalog validation failed: {path}: thresholds must be a mapping.")
 
     required_keys = (
-        "amount_threshold",
+        "acquisition_amount_threshold",
+        "disposal_amount_threshold",
         "acquisition_area_threshold",
         "disposal_area_threshold",
         "seosan_private_sale_threshold",

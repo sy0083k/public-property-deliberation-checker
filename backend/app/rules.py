@@ -22,7 +22,8 @@ class RuleResult:
 
 
 DEFAULT_THRESHOLDS = {
-    "amount_threshold": 1_000_000_000,
+    "acquisition_amount_threshold": 1_000_000_000,
+    "disposal_amount_threshold": 1_000_000_000,
     "acquisition_area_threshold": 1000,
     "disposal_area_threshold": 2000,
     "seosan_private_sale_threshold": 50_000_000,
@@ -52,8 +53,15 @@ def evaluate_answers(answers: dict[str, Any], config: dict[str, Any]) -> RuleRes
     exception_reason_code = str(answers.get("exception_reason_code", "none") or "none")
     amount_won = _to_float(answers, "amount_won")
     area_sqm = _to_float(answers, "area_sqm")
-    amount_threshold = _get_positive_float(
-        config, "amount_threshold", float(DEFAULT_THRESHOLDS["amount_threshold"])
+    acquisition_amount_threshold = _get_positive_float(
+        config,
+        "acquisition_amount_threshold",
+        float(DEFAULT_THRESHOLDS["acquisition_amount_threshold"]),
+    )
+    disposal_amount_threshold = _get_positive_float(
+        config,
+        "disposal_amount_threshold",
+        float(DEFAULT_THRESHOLDS["disposal_amount_threshold"]),
     )
     acquisition_area_threshold = _get_positive_float(
         config, "acquisition_area_threshold", float(DEFAULT_THRESHOLDS["acquisition_area_threshold"])
@@ -97,13 +105,13 @@ def evaluate_answers(answers: dict[str, Any], config: dict[str, Any]) -> RuleRes
                 "snapshot": {
                     "amount_won": amount_won,
                     "area_sqm": area_sqm,
-                    "amount_threshold": amount_threshold,
+                    "acquisition_amount_threshold": acquisition_amount_threshold,
                     "acquisition_area_threshold": acquisition_area_threshold,
                     "seosan_private_sale_threshold": private_sale_threshold,
                 },
             }
         )
-        if amount_won >= amount_threshold or area_sqm >= acquisition_area_threshold:
+        if amount_won >= acquisition_amount_threshold or area_sqm >= acquisition_area_threshold:
             return RuleResult("심의 + 관리계획 수립", "취득 기준(10억원 이상 또는 1,000㎡ 이상)에 해당합니다.", trace)
         if amount_won > private_sale_threshold:
             return RuleResult("심의", "취득 기준(5천만원 초과)에 해당합니다.", trace)
@@ -118,13 +126,13 @@ def evaluate_answers(answers: dict[str, Any], config: dict[str, Any]) -> RuleRes
                 "snapshot": {
                     "amount_won": amount_won,
                     "area_sqm": area_sqm,
-                    "amount_threshold": amount_threshold,
+                    "disposal_amount_threshold": disposal_amount_threshold,
                     "disposal_area_threshold": disposal_area_threshold,
                     "seosan_private_sale_threshold": private_sale_threshold,
                 },
             }
         )
-        if amount_won >= amount_threshold or area_sqm >= disposal_area_threshold:
+        if amount_won >= disposal_amount_threshold or area_sqm >= disposal_area_threshold:
             return RuleResult("심의 + 관리계획 수립", "처분 기준(10억원 이상 또는 2,000㎡ 이상)에 해당합니다.", trace)
         if amount_won > private_sale_threshold:
             return RuleResult("심의", "처분 기준(5천만원 초과)에 해당합니다.", trace)

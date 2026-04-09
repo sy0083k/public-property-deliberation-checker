@@ -14,7 +14,8 @@ def _base_yaml(source_rule_items: str) -> str:
 schema_version: 1
 municipality_code: SEOSAN
 thresholds:
-  amount_threshold: 1000000000
+  acquisition_amount_threshold: 1000000000
+  disposal_amount_threshold: 1000000000
   acquisition_area_threshold: 1000
   disposal_area_threshold: 2000
   seosan_private_sale_threshold: 50000000
@@ -95,7 +96,8 @@ def test_load_catalog_rejects_missing_required_key(monkeypatch: pytest.MonkeyPat
 schema_version: 1
 municipality_code: SEOSAN
 thresholds:
-  amount_threshold: 1000000000
+  acquisition_amount_threshold: 1000000000
+  disposal_amount_threshold: 1000000000
   acquisition_area_threshold: 1000
   disposal_area_threshold: 2000
   seosan_private_sale_threshold: 50000000
@@ -117,7 +119,8 @@ def test_load_catalog_rejects_duplicated_exception_code(monkeypatch: pytest.Monk
 schema_version: 1
 municipality_code: SEOSAN
 thresholds:
-  amount_threshold: 1000000000
+  acquisition_amount_threshold: 1000000000
+  disposal_amount_threshold: 1000000000
   acquisition_area_threshold: 1000
   disposal_area_threshold: 2000
   seosan_private_sale_threshold: 50000000
@@ -146,7 +149,8 @@ def test_load_catalog_rejects_wrong_schema_version(monkeypatch: pytest.MonkeyPat
 schema_version: 2
 municipality_code: SEOSAN
 thresholds:
-  amount_threshold: 1000000000
+  acquisition_amount_threshold: 1000000000
+  disposal_amount_threshold: 1000000000
   acquisition_area_threshold: 1000
   disposal_area_threshold: 2000
   seosan_private_sale_threshold: 50000000
@@ -202,7 +206,8 @@ def test_load_catalog_rejects_invalid_threshold_value(monkeypatch: pytest.Monkey
 schema_version: 1
 municipality_code: SEOSAN
 thresholds:
-  amount_threshold: 0
+  acquisition_amount_threshold: 0
+  disposal_amount_threshold: 1000000000
   acquisition_area_threshold: 1000
   disposal_area_threshold: 2000
   seosan_private_sale_threshold: 50000000
@@ -218,7 +223,7 @@ exception_reason_options:
     )
     monkeypatch.setattr(loader, "CATALOGS_DIR", tmp_path)
 
-    with pytest.raises(ValueError, match="thresholds.amount_threshold"):
+    with pytest.raises(ValueError, match="thresholds.acquisition_amount_threshold"):
         loader.load_catalog("SEOSAN")
 
 

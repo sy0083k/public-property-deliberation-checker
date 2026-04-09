@@ -1,7 +1,8 @@
 schema_version: 1
 municipality_code: SEOSAN
 thresholds:
-  amount_threshold: 1000000000
+  acquisition_amount_threshold: 1000000000
+  disposal_amount_threshold: 1000000000
   acquisition_area_threshold: 1000
   disposal_area_threshold: 2000
   seosan_private_sale_threshold: 50000000

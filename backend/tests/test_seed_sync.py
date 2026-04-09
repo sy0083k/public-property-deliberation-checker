@@ -27,7 +27,8 @@ def test_startup_overwrites_active_seosan_thresholds_from_yaml() -> None:
             assert profile.config == CATALOG_THRESHOLDS
 
             profile.config = {
-                "amount_threshold": 1,
+                "acquisition_amount_threshold": 1,
+                "disposal_amount_threshold": 1,
                 "acquisition_area_threshold": 1,
                 "disposal_area_threshold": 1,
                 "seosan_private_sale_threshold": 1,

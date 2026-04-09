@@ -123,7 +123,7 @@ def test_unknown_item_is_non_target() -> None:
     assert result.final_decision == "심의 비대상"
 
 
-def test_amount_threshold_override_changes_decision() -> None:
+def test_acquisition_amount_threshold_override_changes_decision() -> None:
     result = evaluate_answers(
         {
             "selected_rule_item": "공유재산의 취득",
@@ -132,7 +132,8 @@ def test_amount_threshold_override_changes_decision() -> None:
             "area_sqm": 100,
         },
         {
-            "amount_threshold": 100_000_000,
+            "acquisition_amount_threshold": 100_000_000,
+            "disposal_amount_threshold": 1_000_000_000,
             "acquisition_area_threshold": 1000,
             "disposal_area_threshold": 2000,
             "seosan_private_sale_threshold": 50_000_000,
@@ -150,9 +151,29 @@ def test_disposal_area_threshold_override_changes_decision() -> None:
             "area_sqm": 1500,
         },
         {
-            "amount_threshold": 1_000_000_000,
+            "acquisition_amount_threshold": 1_000_000_000,
+            "disposal_amount_threshold": 1_000_000_000,
             "acquisition_area_threshold": 1000,
             "disposal_area_threshold": 1500,
+            "seosan_private_sale_threshold": 50_000_000,
+        },
+    )
+    assert result.final_decision == "심의 + 관리계획 수립"
+
+
+def test_disposal_amount_threshold_override_changes_decision() -> None:
+    result = evaluate_answers(
+        {
+            "selected_rule_item": "공유재산의 처분",
+            "exception_reason_code": "none",
+            "amount_won": 100_000_000,
+            "area_sqm": 100,
+        },
+        {
+            "acquisition_amount_threshold": 1_000_000_000,
+            "disposal_amount_threshold": 100_000_000,
+            "acquisition_area_threshold": 1000,
+            "disposal_area_threshold": 2000,
             "seosan_private_sale_threshold": 50_000_000,
         },
     )
@@ -168,7 +189,8 @@ def test_private_sale_threshold_override_changes_decision() -> None:
             "area_sqm": 10,
         },
         {
-            "amount_threshold": 1_000_000_000,
+            "acquisition_amount_threshold": 1_000_000_000,
+            "disposal_amount_threshold": 1_000_000_000,
             "acquisition_area_threshold": 1000,
             "disposal_area_threshold": 2000,
             "seosan_private_sale_threshold": 10_000_000,
@@ -186,7 +208,8 @@ def test_invalid_config_values_fall_back_to_defaults() -> None:
             "area_sqm": 999,
         },
         {
-            "amount_threshold": "bad",
+            "acquisition_amount_threshold": "bad",
+            "disposal_amount_threshold": None,
             "acquisition_area_threshold": -1,
             "disposal_area_threshold": None,
             "seosan_private_sale_threshold": 0,

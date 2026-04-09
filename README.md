@@ -82,7 +82,7 @@ pytest -q tests
 - 필수 필드:
   - `schema_version: 1`
   - `municipality_code`
-  - `thresholds` (`amount_threshold`, `acquisition_area_threshold`, `disposal_area_threshold`, `seosan_private_sale_threshold`)
+  - `thresholds` (`acquisition_amount_threshold`, `disposal_amount_threshold`, `acquisition_area_threshold`, `disposal_area_threshold`, `seosan_private_sale_threshold`)
   - `source_rule_items` (`label`, `group`, `laws`)
   - `exception_reason_options` (`code`, `label`)
 - `group` 허용값: `deliberation`, `plan_setup`, `plan_change`
